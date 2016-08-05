@@ -1,4 +1,4 @@
-libsndfile: libsndfile (
+libsndfile: libsndfile (a library for reading and writing sampled sound files)
 libsndfile:
 libsndfile: Libsndfile is a library for reading and writing files containing
 libsndfile: sampled sound (such as MS Windows WAV and the Apple/SGI AIFF
@@ -7,5 +7,5 @@ libsndfile:
 libsndfile:
 libsndfile:
 libsndfile:
-libsndfile: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
 libsndfile:
+libsndfile: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
