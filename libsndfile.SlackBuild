@@ -51,6 +51,11 @@ tar -xvf $CWD/${NAME}-${VERSION}.tar.?z* || exit 3
 cd $SRC
 fix_source
 
+# Apply patches
+if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
+  patch -p1 -z.orig < $CWD/${NAME}-${VERSION}.diff || exit 4
+fi
+
 # Configure, make & install
 mkdir build; cd build
 cmake -LAH \
@@ -68,10 +73,10 @@ cmake -LAH \
       -DENABLE_CPACK=ON \
       -DENABLE_EXTERNAL_LIBS=ON \
       -DENABLE_PACKAGE_CONFIG=ON \
-      .. || exit 4
+      .. || exit 5
 
-make -j4 || exit 5
-make DESTDIR=$PKG install || exit 6
+make -j4 || exit 6
+make DESTDIR=$PKG install || exit 7
 # Manually install sndfile-regtest binary
 # See https://github.com/erikd/libsndfile/issues/543
 install -m 755 -p sndfile-regtest $PKG/usr/bin
@@ -96,6 +101,9 @@ SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
 install -m 755 -d $SBDIR
 install -m 644 -p $CWD/slack-desc         $SBDIR/slack-desc
 install -m 644 -p $CWD/slack-required     $SBDIR/slack-required
+if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
+  install -m 644 -p $CWD/${NAME}-${VERSION}.diff $SBDIR/${NAME}-${VERSION}.diff
+fi
 install -m 644 -p $CWD/${NAME}.SlackBuild $SBDIR/${NAME}.SlackBuild
 
 # Assemble
