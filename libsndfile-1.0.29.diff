@@ -1,0 +1,13 @@
+# See https://github.com/erikd/libsndfile/issues/567
+diff -urNad libsndfile-1.0.29-orig/CMakeLists.txt libsndfile-1.0.29/CMakeLists.txt
+--- libsndfile-1.0.29-orig/CMakeLists.txt	2020-08-15 08:50:52.000000000 +0300
++++ libsndfile-1.0.29/CMakeLists.txt	2020-08-27 21:14:30.057097706 +0300
+@@ -355,7 +355,7 @@
+ 	if (DEFINED SYMBOL_OS)
+ 		add_custom_command (
+ 			OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/src/${SYMBOL_FILENAME}
+-			COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/src/create_symbols_file.py ${SYMBOL_OS} ${PROJECT_VERSION_MAJOR} > ${CMAKE_CURRENT_BINARY_DIR}/src/${SYMBOL_FILENAME}
++			COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/src/create_symbols_file.py ${SYMBOL_OS} ${PROJECT_VERSION} > ${CMAKE_CURRENT_BINARY_DIR}/src/${SYMBOL_FILENAME}
+ 			COMMENT "Generating ${SYMBOL_FILENAME}..."
+ 			)
+ 
